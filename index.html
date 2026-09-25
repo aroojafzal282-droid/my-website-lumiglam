@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="LumiGlam - elegant makeup and beauty products.">
+  <title>LumiGlam – Color Your Beauty</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --pink:#f7b7c9;
+      --deep:#8d3d5b;
+      --dark:#3b2430;
+      --cream:#fff8fa;
+      --soft:#fde8ef;
+      --white:#fff;
+      --muted:#806d76;
+      --shadow:0 12px 35px rgba(141,61,91,.12);
+      --radius:18px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:Poppins,sans-serif;
+      color:var(--dark);
+      background:linear-gradient(180deg,#fff 0%,#fff8fa 55%,#fff 100%);
+    }
+    button,input,select,textarea{font:inherit}
+    button{cursor:pointer}
+    a{text-decoration:none;color:inherit}
+
+    .topbar{
+      background:var(--dark);color:#fff;text-align:center;padding:9px 15px;
+      font-size:13px;letter-spacing:.4px
+    }
+    header{
+      position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);
+      backdrop-filter:blur(12px);border-bottom:1px solid #f3dce4
+    }
+    .nav{
+      max-width:1200px;margin:auto;display:flex;align-items:center;gap:25px;
+      padding:16px 20px
+    }
+    .logo{
+      font-family:"Playfair Display",serif;font-size:32px;font-weight:700;
+      color:var(--deep);white-space:nowrap
+    }
+    .logo span{color:#e889a8}
+    .navlinks{display:flex;gap:22px;margin-left:auto;align-items:center}
+    .navlinks a{font-size:14px;font-weight:600;color:#5d4650}
+    .navlinks a:hover{color:var(--deep)}
+    .nav-actions{display:flex;gap:9px}
+    .icon-btn{
+      width:42px;height:42px;border:1px solid #efd4de;border-radius:50%;
+      background:#fff;color:var(--deep);position:relative
+    }
+    .count{
+      position:absolute;right:-3px;top:-4px;background:var(--deep);color:#fff;
+      width:19px;height:19px;border-radius:50%;font-size:10px;display:grid;place-items:center
+    }
+    .menu-btn{display:none}
+
+    .hero{
+      max-width:1200px;margin:24px auto 0;padding:60px 35px;min-height:480px;
+      border-radius:30px;background:
+      radial-gradient(circle at 85% 20%,rgba(255,255,255,.9),transparent 25%),
+      linear-gradient(135deg,#fde0e9,#f8b4c9 50%,#f9dbe5);
+      display:grid;grid-template-columns:1.05fr .95fr;align-items:center;overflow:hidden
+    }
+    .hero h1{font-family:"Playfair Display",serif;font-size:64px;line-height:1.02;color:var(--dark)}
+    .hero h1 span{color:var(--deep)}
+    .hero p{max-width:560px;color:#6e5961;margin:20px 0 28px;line-height:1.8}
+    .btn{
+      border:0;background:var(--deep);color:#fff;padding:13px 23px;border-radius:30px;
+      font-weight:600;box-shadow:0 8px 20px rgba(141,61,91,.18)
+    }
+    .btn:hover{transform:translateY(-1px);opacity:.94}
+    .btn.light{background:#fff;color:var(--deep);border:1px solid #eeced9;box-shadow:none}
+    .hero-art{height:360px;display:grid;place-items:center;position:relative}
+    .beauty-card{
+      width:245px;height:300px;background:rgba(255,255,255,.68);border:1px solid #fff;
+      border-radius:125px 125px 28px 28px;display:flex;align-items:center;justify-content:center;
+      box-shadow:0 30px 70px rgba(141,61,91,.15);transform:rotate(5deg)
+    }
+    .beauty-card .lip{
+      width:48px;height:145px;border-radius:12px 12px 7px 7px;background:#a74368;
+      position:relative;box-shadow:inset 8px 0 rgba(255,255,255,.16)
+    }
+    .beauty-card .lip:before{content:"";position:absolute;top:-32px;left:4px;width:40px;height:38px;background:#cf7391;border-radius:14px 14px 6px 6px}
+    .floating{position:absolute;background:#fff;padding:12px 17px;border-radius:15px;box-shadow:var(--shadow);font-size:12px;font-weight:600}
+    .f1{top:25px;left:35px}.f2{bottom:35px;right:15px}.f3{top:80px;right:5px}
+
+    .section{max-width:1200px;margin:70px auto;padding:0 20px}
+    .section-head{text-align:center;margin-bottom:28px}
+    .eyebrow{text-transform:uppercase;letter-spacing:2px;font-size:11px;color:#b36b83;font-weight:700}
+    .section-head h2{font-family:"Playfair Display",serif;font-size:38px;margin-top:6px}
+    .section-head p{color:var(--muted);font-size:14px;margin-top:7px}
+
+    .categories{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+    .cat{
+      background:#fff;border:1px solid #f1dce4;border-radius:18px;padding:22px 10px;
+      text-align:center;transition:.2s;box-shadow:0 5px 20px rgba(141,61,91,.04)
+    }
+    .cat:hover,.cat.active{background:var(--soft);transform:translateY(-3px)}
+    .cat .emoji{font-size:30px}.cat strong{display:block;font-size:13px;margin-top:9px}
+
+    .toolbar{
+      display:flex;gap:12px;justify-content:space-between;align-items:center;
+      margin-bottom:22px;flex-wrap:wrap
+    }
+    .search{flex:1;min-width:230px;position:relative}
+    .search input{
+      width:100%;padding:13px 16px;border:1px solid #ead4dc;border-radius:30px;
+      outline:none;background:#fff
+    }
+    .select{padding:12px 15px;border:1px solid #ead4dc;border-radius:30px;background:#fff;color:#5d4650}
+    .products{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+    .product{
+      background:#fff;border:1px solid #f1dfe5;border-radius:18px;overflow:hidden;
+      box-shadow:0 8px 25px rgba(141,61,91,.06);transition:.2s
+    }
+    .product:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+    .product-img{height:245px;background:#fceef3;position:relative;overflow:hidden}
+    .product-img img{width:100%;height:100%;object-fit:cover}
+    .badge{position:absolute;top:12px;left:12px;background:#fff;color:var(--deep);font-size:10px;font-weight:700;padding:6px 9px;border-radius:20px}
+    .heart{position:absolute;right:12px;top:12px;width:35px;height:35px;border:0;border-radius:50%;background:#fff;color:#a14b6a}
+    .product-info{padding:15px}
+    .product-info .category{font-size:10px;color:#b36b83;text-transform:uppercase;letter-spacing:1px}
+    .product-info h3{font-size:15px;margin:4px 0 7px}
+    .desc{font-size:11px;color:#76666d;line-height:1.5;min-height:34px}
+    .price-row{display:flex;align-items:center;justify-content:space-between;margin-top:13px}
+    .price{font-weight:700;color:var(--deep)}
+    .add{border:0;background:var(--dark);color:#fff;border-radius:20px;padding:8px 13px;font-size:11px}
+
+    .about{
+      background:linear-gradient(135deg,#fff0f5,#fff);border:1px solid #f2dbe3;
+      border-radius:25px;padding:38px;display:grid;grid-template-columns:1fr 1fr;gap:35px
+    }
+    .about h2{font-family:"Playfair Display",serif;font-size:38px}
+    .about p{color:var(--muted);line-height:1.8;margin-top:12px;font-size:14px}
+    .features{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .feature{background:#fff;border:1px solid #f2dbe3;padding:17px;border-radius:15px}
+    .feature b{font-size:13px}.feature p{font-size:11px;margin-top:5px}
+
+    footer{background:#35212b;color:#fff;margin-top:80px;padding:45px 20px}
+    .footer-inner{max-width:1200px;margin:auto;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px}
+    footer .logo{color:#fff} footer p,footer a{color:#d8c6cd;font-size:12px;line-height:1.8}
+    footer h4{margin-bottom:10px;font-size:13px}
+
+    .overlay{display:none;position:fixed;inset:0;background:rgba(32,15,23,.42);z-index:100}
+    .overlay.show{display:block}
+    .drawer{
+      position:absolute;right:0;top:0;height:100%;width:min(430px,95vw);background:#fff;
+      padding:25px;overflow:auto
+    }
+    .drawer-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+    .close{border:0;background:#f8e8ee;width:36px;height:36px;border-radius:50%;color:var(--deep)}
+    .cart-item{display:flex;gap:12px;padding:13px 0;border-bottom:1px solid #f0e0e6}
+    .cart-item img{width:65px;height:65px;object-fit:cover;border-radius:12px}
+    .cart-item h4{font-size:12px}.cart-item p{font-size:11px;color:#876d78}
+    .qty{display:flex;gap:7px;align-items:center;margin-top:7px}.qty button{width:24px;height:24px;border:1px solid #e4cbd4;background:#fff;border-radius:50%}
+    .total{display:flex;justify-content:space-between;font-weight:700;margin:22px 0}
+    .empty{text-align:center;color:#8a737c;padding:40px 10px}
+
+    .modal{display:none;position:fixed;inset:0;background:rgba(32,15,23,.52);z-index:110;place-items:center;padding:15px}
+    .modal.show{display:grid}
+    .modal-box{background:#fff;width:min(900px,100%);max-height:90vh;overflow:auto;border-radius:22px;padding:25px}
+    .modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+    .modal-head h2{font-family:"Playfair Display",serif}
+    .checkout-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+    .field{display:flex;flex-direction:column;gap:6px}.field label{font-size:11px;font-weight:600;color:#6c5660}
+    .field input,.field textarea,.field select{padding:11px;border:1px solid #e7d2da;border-radius:10px;outline:none}
+    .field.full{grid-column:1/-1}
+    .order-summary{margin-top:20px;background:#fff7fa;border-radius:14px;padding:15px}
+    .order-summary div{display:flex;justify-content:space-between;padding:5px 0;font-size:12px}
+
+    .admin-panel{display:none}
+    .admin-panel.show{display:block}
+    .admin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}
+    .stat{background:#fff;border:1px solid #efdce4;border-radius:15px;padding:18px}
+    .stat b{font-size:24px;color:var(--deep);display:block}
+    .admin-table{width:100%;border-collapse:collapse;font-size:11px;background:#fff}
+    .admin-table th,.admin-table td{padding:10px;border-bottom:1px solid #f0e0e6;text-align:left}
+    .admin-actions{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
+    .danger{background:#9d3657}.small{padding:8px 12px;font-size:11px}
+
+    .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);
+      background:#35212b;color:#fff;padding:12px 18px;border-radius:30px;font-size:12px;
+      opacity:0;pointer-events:none;transition:.25s;z-index:300}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+    @media(max-width:950px){
+      .products{grid-template-columns:repeat(3,1fr)}
+      .categories{grid-template-columns:repeat(3,1fr)}
+      .hero{grid-template-columns:1fr}.hero-art{display:none}
+      .footer-inner{grid-template-columns:1fr 1fr}
+    }
+    @media(max-width:700px){
+      .navlinks{display:none}.menu-btn{display:block}
+      .nav{justify-content:space-between}
+      .hero{margin:10px;padding:35px 22px;min-height:390px}
+      .hero h1{font-size:45px}
+      .products{grid-template-columns:repeat(2,1fr);gap:12px}
+      .product-img{height:190px}
+      .categories{grid-template-columns:repeat(2,1fr)}
+      .about{grid-template-columns:1fr;padding:25px}
+      .checkout-grid{grid-template-columns:1fr}
+      .field.full{grid-column:auto}
+      .admin-grid{grid-template-columns:1fr}
+      .footer-inner{grid-template-columns:1fr}
+    }
+    @media(max-width:430px){
+      .products{grid-template-columns:1fr}
+      .product-img{height:250px}
+      .hero h1{font-size:39px}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">✨ Welcome to LumiGlam — Beauty made beautifully.</div>
+
+  <header>
+    <nav class="nav">
+      <a href="#home" class="logo">Lumi<span>Glam</span></a>
+
+      <div class="navlinks">
+        <a href="#home">Home</a>
+        <a href="#categories">Categories</a>
+        <a href="#shop">Shop</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <div class="nav-actions">
+        <button class="icon-btn" title="Buyer account" onclick="openBuyer()">👤</button>
+        <button class="icon-btn" title="Cart" onclick="openCart()">🛍️<span class="count" id="cartCount">0</span></button>
+        <button class="icon-btn" title="Admin" onclick="openAdminLogin()">⚙️</button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div>
+        <div class="eyebrow">Makeup • Beauty • Glow</div>
+        <h1>Color your <span>beauty.</span></h1>
+        <p>
+          Discover beautiful makeup essentials curated for everyday glam,
+          soft looks and special moments. Shop your favorites from LumiGlam.
+        </p>
+        <button class="btn" onclick="document.getElementById('shop').scrollIntoView()">Shop Collection</button>
+        <button class="btn light" style="margin-left:8px" onclick="filterCategory('All')">View All</button>
+      </div>
+      <div class="hero-art">
+        <div class="beauty-card"><div class="lip"></div></div>
+        <div class="floating f1">💗 Soft & Elegant</div>
+        <div class="floating f2">✨ Glow Collection</div>
+        <div class="floating f3">💄 Makeup Must-Haves</div>
+      </div>
+    </section>
+
+    <section class="section" id="categories">
+      <div class="section-head">
+        <div class="eyebrow">Shop by category</div>
+        <h2>Find your beauty favorites</h2>
+        <p>Choose a category and explore the collection.</p>
+      </div>
+      <div class="categories" id="categoryCards"></div>
+    </section>
+
+    <section class="section" id="shop">
+      <div class="section-head">
+        <div class="eyebrow">LumiGlam collection</div>
+        <h2>Beauty products</h2>
+        <p>Prices are shown in Pakistani Rupees (PKR).</p>
+      </div>
+
+      <div class="toolbar">
+        <div class="search"><input id="searchInput" type="search" placeholder="Search lipstick, blush, foundation..." oninput="renderProducts()"></div>
+        <select class="select" id="sortSelect" onchange="renderProducts()">
+          <option value="default">Sort: Featured</option>
+          <option value="low">Price: Low to High</option>
+          <option value="high">Price: High to Low</option>
+          <option value="name">Name: A to Z</option>
+        </select>
+      </div>
+
+      <div class="products" id="productGrid"></div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="about">
+        <div>
+          <div class="eyebrow">About LumiGlam</div>
+          <h2>Beauty that feels like you.</h2>
+          <p>
+            LumiGlam is a modern beauty store concept focused on makeup,
+            self-care and everyday glam. You can change product names,
+            prices, descriptions and categories from the code or use the
+            demo admin panel included in this template.
+          </p>
+        </div>
+        <div class="features">
+          <div class="feature"><b>💗 Pretty picks</b><p>Curated products for different beauty styles.</p></div>
+          <div class="feature"><b>🚚 Easy ordering</b><p>Add products to cart and submit your order.</p></div>
+          <div class="feature"><b>✨ Simple shopping</b><p>Search, categories and sorting included.</p></div>
+          <div class="feature"><b>🛠️ Editable</b><p>Product data is easy to edit in one place.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Demo admin panel -->
+    <section class="section admin-panel" id="adminPanel">
+      <div class="section-head">
+        <div class="eyebrow">Admin area</div>
+        <h2>LumiGlam Dashboard</h2>
+        <p>Demo front-end admin panel — data is saved in this browser.</p>
+      </div>
+      <div class="admin-actions">
+        <button class="btn small" onclick="addProduct()">+ Add Product</button>
+        <button class="btn light small" onclick="exportProducts()">Export Products JSON</button>
+        <button class="btn light small" onclick="logoutAdmin()">Close Admin</button>
+      </div>
+      <div class="admin-grid">
+        <div class="stat"><span>Total Products</span><b id="statProducts">0</b></div>
+        <div class="stat"><span>Categories</span><b id="statCategories">0</b></div>
+        <div class="stat"><span>Cart Items</span><b id="statCart">0</b></div>
+      </div>
+      <div style="overflow:auto">
+        <table class="admin-table">
+          <thead><tr><th>Product</th><th>Category</th><th>Price</th><th>Action</th></tr></thead>
+          <tbody id="adminTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <div class="footer-inner">
+      <div>
+        <div class="logo">Lumi<span>Glam</span></div>
+        <p style="margin-top:10px">Color Your Beauty — a soft, elegant makeup shopping experience.</p>
+      </div>
+      <div><h4>Shop</h4><p><a href="#shop">All Products</a></p><p><a href="#categories">Categories</a></p></div>
+      <div><h4>Customer Care</h4><p>WhatsApp: +92 300 0000000</p><p>Email: hello@lumiglam.example</p></div>
+      <div><h4>Follow</h4><p>Instagram: @lumiglam</p><p>Facebook: LumiGlam</p></div>
+    </div>
+  </footer>
+
+  <!-- Cart drawer -->
+  <div class="overlay" id="cartOverlay" onclick="if(event.target===this)closeCart()">
+    <aside class="drawer">
+      <div class="drawer-head"><h2>Your Bag</h2><button class="close" onclick="closeCart()">✕</button></div>
+      <div id="cartItems"></div>
+      <div class="total"><span>Total</span><span id="cartTotal">PKR 0</span></div>
+      <button class="btn" style="width:100%" onclick="openCheckout()">Proceed to Checkout</button>
+    </aside>
+  </div>
+
+  <!-- Buyer account modal -->
+  <div class="modal" id="buyerModal">
+    <div class="modal-box" style="max-width:480px">
+      <div class="modal-head"><h2>Buyer Account</h2><button class="close" onclick="closeModal('buyerModal')">✕</button></div>
+      <p style="font-size:13px;color:#77636c;line-height:1.7">
+        This starter website uses a simple browser-based buyer profile. For a real online store,
+        connect this to a secure database/authentication service.
+      </p>
+      <div class="field" style="margin-top:16px"><label>Your Name</label><input id="buyerName" placeholder="Enter your name"></div>
+      <div class="field" style="margin-top:12px"><label>Email</label><input id="buyerEmail" placeholder="you@example.com"></div>
+      <button class="btn" style="margin-top:15px" onclick="saveBuyer()">Save Profile</button>
+    </div>
+  </div>
+
+  <!-- Checkout modal -->
+  <div class="modal" id="checkoutModal">
+    <div class="modal-box">
+      <div class="modal-head"><h2>Checkout</h2><button class="close" onclick="closeModal('checkoutModal')">✕</button></div>
+      <div class="checkout-grid">
+        <div class="field"><label>Full Name *</label><input id="orderName" required></div>
+        <div class="field"><label>Phone *</label><input id="orderPhone" required placeholder="03XXXXXXXXX"></div>
+        <div class="field full"><label>Delivery Address *</label><textarea id="orderAddress" rows="3"></textarea></div>
+        <div class="field"><label>City *</label><input id="orderCity"></div>
+        <div class="field"><label>Payment</label><select id="payment"><option>Cash on Delivery</option><option>Bank Transfer</option></select></div>
+      </div>
+      <div class="order-summary" id="checkoutSummary"></div>
+      <button class="btn" style="margin-top:15px;width:100%" onclick="placeOrder()">Place Order</button>
+    </div>
+  </div>
+
+  <!-- Admin login modal -->
+  <div class="modal" id="adminLoginModal">
+    <div class="modal-box" style="max-width:420px">
+      <div class="modal-head"><h2>Admin Login</h2><button class="close" onclick="closeModal('adminLoginModal')">✕</button></div>
+      <p style="font-size:12px;color:#806d76;line-height:1.6">
+        DEMO ONLY: this password is stored in the browser code and is NOT secure for a real store.
+      </p>
+      <div class="field" style="margin-top:15px"><label>Username</label><input id="adminUser" value="admin"></div>
+      <div class="field" style="margin-top:12px"><label>Password</label><input id="adminPass" type="password" placeholder="Enter admin password"></div>
+      <button class="btn" style="margin-top:15px;width:100%" onclick="loginAdmin()">Login</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    /*
+      ==========================
+      LUMIGLAM EDITABLE DATA
+      ==========================
+      Change names, prices, descriptions and image URLs here.
+      Keep each product's id unique.
+    */
+    const defaultProducts = [
+      {id:1,name:"Velvet Matte Lipstick",category:"Lip Makeup",price:1299,desc:"Smooth matte lipstick with rich, comfortable color.",img:"https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=700&q=80",badge:"Bestseller"},
+      {id:2,name:"Hydra Glow Lip Gloss",category:"Lip Makeup",price:899,desc:"Glossy finish for soft, hydrated-looking lips.",img:"https://images.unsplash.com/photo-1625093526271-7a3b2f4a4d0a?auto=format&fit=crop&w=700&q=80",badge:"New"},
+      {id:3,name:"Nude Lip Liner",category:"Lip Makeup",price:599,desc:"Creamy liner for precise, defined lips.",img:"https://images.unsplash.com/photo-1631214524020-7e18db9f5f52?auto=format&fit=crop&w=700&q=80"},
+      {id:4,name:"Rose Blush Duo",category:"Face Makeup",price:1099,desc:"Two flattering blush shades for a fresh rosy look.",img:"https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=80"},
+      {id:5,name:"Silk Touch Foundation",category:"Face Makeup",price:1799,desc:"Lightweight buildable coverage with a smooth finish.",img:"https://images.unsplash.com/photo-1631730486572-226d1f595b68?auto=format&fit=crop&w=700&q=80"},
+      {id:6,name:"Soft Focus Concealer",category:"Face Makeup",price:999,desc:"Creamy coverage for under-eyes and everyday touch-ups.",img:"https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=700&q=80"},
+      {id:7,name:"Lumi Highlight Stick",category:"Face Makeup",price:1199,desc:"Easy cream highlighter for a natural luminous glow.",img:"https://images.unsplash.com/photo-1612817288484-6f916006741a?auto=format&fit=crop&w=700&q=80"},
+      {id:8,name:"Peach Blush Stick",category:"Face Makeup",price:949,desc:"Blendable cream blush with a soft peach finish.",img:"https://images.unsplash.com/photo-1583241800698-e8ab01830a07?auto=format&fit=crop&w=700&q=80"},
+      {id:9,name:"Everyday Eyeshadow Palette",category:"Eye Makeup",price:1599,desc:"Warm neutral shades for simple everyday eye looks.",img:"https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=700&q=80",badge:"Popular"},
+      {id:10,name:"Rose Gold Eyeshadow Palette",category:"Eye Makeup",price:1899,desc:"Romantic shimmer and matte shades for glam looks.",img:"https://images.unsplash.com/photo-1512207846876-bb54ef505d0a?auto=format&fit=crop&w=700&q=80"},
+      {id:11,name:"Waterproof Mascara",category:"Eye Makeup",price:1099,desc:"Lengthening mascara for defined, lifted-looking lashes.",img:"https://images.unsplash.com/photo-1631214500115-598fc2e8f5c5?auto=format&fit=crop&w=700&q=80"},
+      {id:12,name:"Precision Eyeliner",category:"Eye Makeup",price:749,desc:"Fine-tip liner for clean lines and easy wings.",img:"https://images.unsplash.com/photo-1583241800698-e8ab01830a07?auto=format&fit=crop&w=700&q=80"},
+      {id:13,name:"Brow Sculpt Pencil",category:"Eye Makeup",price:699,desc:"Fine pencil for natural-looking brow definition.",img:"https://images.unsplash.com/photo-1596704017254-9b121068fb31?auto=format&fit=crop&w=700&q=80"},
+      {id:14,name:"Glow Setting Powder",category:"Face Makeup",price:1299,desc:"Fine powder to set makeup without a heavy feel.",img:"https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?auto=format&fit=crop&w=700&q=80"},
+      {id:15,name:"Dewy Setting Spray",category:"Face Makeup",price:1399,desc:"Finishing mist that leaves makeup fresh and radiant.",img:"https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=700&q=80"},
+      {id:16,name:"Blending Sponge Set",category:"Tools & Brushes",price:799,desc:"Soft makeup sponges for seamless blending.",img:"https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=80"},
+      {id:17,name:"5-Piece Brush Set",category:"Tools & Brushes",price:1499,desc:"Essential face and eye brushes for everyday makeup.",img:"https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=700&q=80"},
+      {id:18,name:"Luxury Brush Set",category:"Tools & Brushes",price:2499,desc:"Soft premium-feel brushes for detailed application.",img:"https://images.unsplash.com/photo-1512207846876-bb54ef505d0a?auto=format&fit=crop&w=700&q=80"},
+      {id:19,name:"Rose Beauty Sponge",category:"Tools & Brushes",price:499,desc:"Soft teardrop sponge for foundation and concealer.",img:"https://images.unsplash.com/photo-1612817288484-6f916006741a?auto=format&fit=crop&w=700&q=80"},
+      {id:20,name:"Hydrating Face Mist",category:"Skincare",price:999,desc:"Refreshing mist for a quick hydration boost.",img:"https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?auto=format&fit=crop&w=700&q=80"},
+      {id:21,name:"Gentle Face Cleanser",category:"Skincare",price:1199,desc:"Daily cleanser designed for a clean, comfortable feel.",img:"https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=700&q=80"},
+      {id:22,name:"Pink Clay Face Mask",category:"Skincare",price:1299,desc:"Creamy clay mask for a refreshed-looking complexion.",img:"https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=700&q=80"},
+      {id:23,name:"Vitamin Glow Serum",category:"Skincare",price:1699,desc:"Lightweight serum for a bright, healthy-looking glow.",img:"https://images.unsplash.com/photo-1620916566398-39f1143ab7ba?auto=format&fit=crop&w=700&q=80"},
+      {id:24,name:"Silky Hand Cream",category:"Body Care",price:699,desc:"Soft hand cream with a delicate beauty-store scent.",img:"https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=700&q=80"},
+      {id:25,name:"Body Glow Lotion",category:"Body Care",price:1299,desc:"Light lotion with a subtle luminous finish.",img:"https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=700&q=80"},
+      {id:26,name:"Vanilla Body Mist",category:"Fragrance",price:1199,desc:"Sweet vanilla-inspired body mist for everyday wear.",img:"https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=700&q=80"},
+      {id:27,name:"Rose Petal Perfume",category:"Fragrance",price:1999,desc:"A soft floral-inspired fragrance for elegant moments.",img:"https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=700&q=80",badge:"New"},
+      {id:28,name:"Amber Night Perfume",category:"Fragrance",price:2299,desc:"Warm, sophisticated fragrance with a deeper character.",img:"https://images.unsplash.com/photo-1587017539504-67cfbddac569?auto=format&fit=crop&w=700&q=80"},
+      {id:29,name:"Glam Makeup Pouch",category:"Accessories",price:899,desc:"Compact pouch for carrying your daily beauty essentials.",img:"https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&w=700&q=80"},
+      {id:30,name:"Pink Vanity Mirror",category:"Accessories",price:1599,desc:"Pretty tabletop mirror for your makeup routine.",img:"https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=700&q=80"}
+    ];
+
+    const categoryInfo = {
+      "All": ["✨","All Products"],
+      "Face Makeup": ["🌸","Face Makeup"],
+      "Eye Makeup": ["👁️","Eye Makeup"],
+      "Lip Makeup": ["💄","Lip Makeup"],
+      "Skincare": ["🧴","Skincare"],
+      "Body Care": ["🫧","Body Care"],
+      "Fragrance": ["🌹","Fragrance"],
+      "Tools & Brushes": ["🖌️","Tools & Brushes"],
+      "Accessories": ["👜","Accessories"]
+    };
+
+    let products = JSON.parse(localStorage.getItem("lumiglam_products")) || defaultProducts;
+    let cart = JSON.parse(localStorage.getItem("lumiglam_cart")) || [];
+    let adminLoggedIn = false;
+
+    const money = n => "PKR " + Number(n).toLocaleString("en-PK");
+
+    function saveProducts(){ localStorage.setItem("lumiglam_products", JSON.stringify(products)); }
+    function saveCart(){ localStorage.setItem("lumiglam_cart", JSON.stringify(cart)); }
+
+    function renderCategories(){
+      const el=document.getElementById("categoryCards");
+      el.innerHTML=Object.entries(categoryInfo).map(([name,data]) =>
+        `<button class="cat" onclick="filterCategory('${name}')"><div class="emoji">${data[0]}</div><strong>${data[1]}</strong></button>`
+      ).join("");
+    }
+
+    let selectedCategory="All";
+    function filterCategory(cat){
+      selectedCategory=cat;
+      renderProducts();
+      document.getElementById("shop").scrollIntoView({behavior:"smooth"});
+    }
+
+    function renderProducts(){
+      const q=document.getElementById("searchInput").value.toLowerCase().trim();
+      const sort=document.getElementById("sortSelect").value;
+      let list=products.filter(p =>
+        (selectedCategory==="All" || p.category===selectedCategory) &&
+        (`${p.name} ${p.category} ${p.desc}`).toLowerCase().includes(q)
+      );
+      if(sort==="low") list.sort((a,b)=>a.price-b.price);
+      if(sort==="high") list.sort((a,b)=>b.price-a.price);
+      if(sort==="name") list.sort((a,b)=>a.name.localeCompare(b.name));
+
+      document.getElementById("productGrid").innerHTML=list.map(p=>`
+        <article class="product">
+          <div class="product-img">
+            <img src="${p.img}" alt="${escapeHtml(p.name)}" loading="lazy">
+            ${p.badge?`<span class="badge">${escapeHtml(p.badge)}</span>`:""}
+            <button class="heart" onclick="toggleWishlist(${p.id})">♡</button>
+          </div>
+          <div class="product-info">
+            <div class="category">${escapeHtml(p.category)}</div>
+            <h3>${escapeHtml(p.name)}</h3>
+            <div class="desc">${escapeHtml(p.desc)}</div>
+            <div class="price-row">
+              <span class="price">${money(p.price)}</span>
+              <button class="add" onclick="addToCart(${p.id})">Add to Bag</button>
+            </div>
+          </div>
+        </article>
+      `).join("") || `<div class="empty" style="grid-column:1/-1">No products found.</div>`;
+    }
+
+    function escapeHtml(s){
+      return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
+    }
+
+    function addToCart(id){
+      const existing=cart.find(x=>x.id===id);
+      if(existing) existing.qty++;
+      else cart.push({id,qty:1});
+      saveCart(); updateCart(); toast("Added to your bag 💗");
+    }
+
+    function changeQty(id,delta){
+      const item=cart.find(x=>x.id===id);
+      if(!item)return;
+      item.qty+=delta;
+      if(item.qty<=0) cart=cart.filter(x=>x.id!==id);
+      saveCart(); updateCart(); renderAdminStats();
+    }
+
+    function updateCart(){
+      const count=cart.reduce((s,x)=>s+x.qty,0);
+      document.getElementById("cartCount").textContent=count;
+      const box=document.getElementById("cartItems");
+      if(!cart.length){box.innerHTML=`<div class="empty">Your bag is empty.<br>Find something beautiful ✨</div>`}
+      else{
+        box.innerHTML=cart.map(item=>{
+          const p=products.find(x=>x.id===item.id);
+          if(!p)return "";
+          return `<div class="cart-item">
+            <img src="${p.img}" alt="">
+            <div style="flex:1"><h4>${escapeHtml(p.name)}</h4><p>${money(p.price)}</p>
+              <div class="qty"><button onclick="changeQty(${p.id},-1)">−</button><span>${item.qty}</span><button onclick="changeQty(${p.id},1)">+</button></div>
+            </div>
+          </div>`
+        }).join("");
+      }
+      const total=cart.reduce((s,item)=>{
+        const p=products.find(x=>x.id===item.id); return s+(p?p.price*item.qty:0)
+      },0);
+      document.getElementById("cartTotal").textContent=money(total);
+      document.getElementById("statCart").textContent=count;
+    }
+
+    function openCart(){document.getElementById("cartOverlay").classList.add("show");updateCart()}
+    function closeCart(){document.getElementById("cartOverlay").classList.remove("show")}
+    function closeModal(id){document.getElementById(id).classList.remove("show")}
+
+    function openBuyer(){
+      const b=JSON.parse(localStorage.getItem("lumiglam_buyer")||"{}");
+      document.getElementById("buyerName").value=b.name||"";
+      document.getElementById("buyerEmail").value=b.email||"";
+      document.getElementById("buyerModal").classList.add("show");
+    }
+    function saveBuyer(){
+      localStorage.setItem("lumiglam_buyer",JSON.stringify({
+        name:document.getElementById("buyerName").value,
+        email:document.getElementById("buyerEmail").value
+      }));
+      closeModal("buyerModal");toast("Buyer profile saved 💗");
+    }
+
+    function openCheckout(){
+      if(!cart.length){toast("Your bag is empty.");return}
+      closeCart();
+      const b=JSON.parse(localStorage.getItem("lumiglam_buyer")||"{}");
+      document.getElementById("orderName").value=b.name||"";
+      document.getElementById("checkoutSummary").innerHTML=cart.map(item=>{
+        const p=products.find(x=>x.id===item.id);
+        return `<div><span>${escapeHtml(p.name)} × ${item.qty}</span><b>${money(p.price*item.qty)}</b></div>`
+      }).join("") + `<hr style="border:0;border-top:1px solid #edd9e1;margin:8px 0"><div><b>Total</b><b>${document.getElementById("cartTotal").textContent}</b></div>`;
+      document.getElementById("checkoutModal").classList.add("show");
+    }
+
+    function placeOrder(){
+      const name=document.getElementById("orderName").value.trim();
+      const phone=document.getElementById("orderPhone").value.trim();
+      const address=document.getElementById("orderAddress").value.trim();
+      if(!name||!phone||!address){toast("Please fill the required fields.");return}
+      const orders=JSON.parse(localStorage.getItem("lumiglam_orders")||"[]");
+      orders.push({
+        id:"LG-"+Date.now(),
+        date:new Date().toLocaleString(),
+        name,phone,address,
+        city:document.getElementById("orderCity").value,
+        payment:document.getElementById("payment").value,
+        items:cart,
+        total:cart.reduce((s,i)=>{const p=products.find(x=>x.id===i.id);return s+(p?p.price*i.qty:0)},0)
+      });
+      localStorage.setItem("lumiglam_orders",JSON.stringify(orders));
+      cart=[];saveCart();updateCart();closeModal("checkoutModal");
+      toast("Order placed successfully! 💗");
+    }
+
+    function toggleWishlist(id){toast("Added to wishlist ♡")}
+
+    function openAdminLogin(){
+      if(adminLoggedIn){showAdmin();return}
+      document.getElementById("adminLoginModal").classList.add("show");
+    }
+
+    function loginAdmin(){
+      const user=document.getElementById("adminUser").value.trim();
+      const pass=document.getElementById("adminPass").value;
+      // DEMO PASSWORD — change this value before testing.
+      if(user==="admin" && pass==="LumiGlam@123"){
+        adminLoggedIn=true;
+        closeModal("adminLoginModal");
+        showAdmin();
+        toast("Welcome to LumiGlam Admin ✨");
+      }else toast("Wrong admin username or password.");
+    }
+
+    function showAdmin(){
+      document.getElementById("adminPanel").classList.add("show");
+      renderAdmin();
+      document.getElementById("adminPanel").scrollIntoView({behavior:"smooth"});
+    }
+    function logoutAdmin(){
+      adminLoggedIn=false;
+      document.getElementById("adminPanel").classList.remove("show");
+      toast("Admin panel closed.");
+    }
+
+    function renderAdminStats(){
+      document.getElementById("statProducts").textContent=products.length;
+      document.getElementById("statCategories").textContent=new Set(products.map(p=>p.category)).size;
+      document.getElementById("statCart").textContent=cart.reduce((s,x)=>s+x.qty,0);
+    }
+
+    function renderAdmin(){
+      renderAdminStats();
+      document.getElementById("adminTableBody").innerHTML=products.map(p=>`
+        <tr>
+          <td>${escapeHtml(p.name)}</td>
+          <td>${escapeHtml(p.category)}</td>
+          <td>${money(p.price)}</td>
+          <td>
+            <button class="btn light small" onclick="editProduct(${p.id})">Edit</button>
+            <button class="btn danger small" onclick="deleteProduct(${p.id})">Delete</button>
+          </td>
+        </tr>
+      `).join("");
+    }
+
+    function addProduct(){
+      const name=prompt("Product name:");
+      if(!name)return;
+      const category=prompt("Category:", "Face Makeup")||"Face Makeup";
+      const price=Number(prompt("Price in PKR:", "999"));
+      if(!price)return;
+      const desc=prompt("Short description:", "Beautiful LumiGlam makeup product.")||"";
+      const img=prompt("Image URL:", "https://images.unsplash.com/")||"";
+      products.push({id:Date.now(),name,category,price,desc,img});
+      saveProducts();renderProducts();renderAdmin();toast("Product added.");
+    }
+
+    function editProduct(id){
+      const p=products.find(x=>x.id===id);if(!p)return;
+      const name=prompt("Product name:",p.name);if(name===null)return;
+      const price=Number(prompt("Price in PKR:",p.price));if(!price)return;
+      const desc=prompt("Description:",p.desc);if(desc===null)return;
+      const category=prompt("Category:",p.category);if(category===null)return;
+      p.name=name;p.price=price;p.desc=desc;p.category=category;
+      saveProducts();renderProducts();renderAdmin();toast("Product updated.");
+    }
+
+    function deleteProduct(id){
+      if(!confirm("Delete this product?"))return;
+      products=products.filter(p=>p.id!==id);
+      saveProducts();renderProducts();renderAdmin();toast("Product deleted.");
+    }
+
+    function exportProducts(){
+      const blob=new Blob([JSON.stringify(products,null,2)],{type:"application/json"});
+      const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="lumiglam-products.json";a.click();
+      URL.revokeObjectURL(a.href);
+    }
+
+    function toast(msg){
+      const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");
+      clearTimeout(window.__toast);window.__toast=setTimeout(()=>t.classList.remove("show"),2200);
+    }
+
+    renderCategories();
+    renderProducts();
+    updateCart();
+    renderAdminStats();
+  </script>
+</body>
+</html>
